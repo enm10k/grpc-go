@@ -43,11 +43,15 @@ import (
 )
 
 const (
-	address     = "localhost:50051"
 	defaultName = "world"
 )
 
 func main() {
+	address := os.Getenv("ADDRESS")
+	if len(address) == 0 {
+		address = "localhost:50051"
+	}
+
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
